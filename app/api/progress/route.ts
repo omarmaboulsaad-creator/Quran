@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server"; import {getCurrentUser} from "@/lib/auth"; import {db} from "@/lib/db";
+export async function GET(){const u=await getCurrentUser();if(!u)return NextResponse.json({error:"UNAUTHORIZED"},{status:401});return NextResponse.json(await db.progress.findUnique({where:{userId:u.id}}));}
