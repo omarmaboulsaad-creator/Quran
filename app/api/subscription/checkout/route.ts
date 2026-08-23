@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server"; import {getCurrentUser} from "@/lib/auth";
+export async function GET(){const u=await getCurrentUser();if(!u)return NextResponse.redirect(new URL("/?login=required",process.env.NEXT_PUBLIC_APP_URL||"http://localhost:3000"));const url=process.env.BILLING_CHECKOUT_URL;if(!url)return NextResponse.json({error:"Configure BILLING_CHECKOUT_URL for production billing."},{status:503});return NextResponse.redirect(url);}

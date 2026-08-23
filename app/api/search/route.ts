@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server"; import {searchQuran} from "@/lib/quran"; import {getCurrentUser} from "@/lib/auth"; import {db} from "@/lib/db";
+export async function GET(req:Request){const u=await getCurrentUser();const q=new URL(req.url).searchParams.get("q")?.trim();if(!q)return NextResponse.json({data:[]});const data=await searchQuran(q);if(u)await db.searchHistory.create({data:{userId:u.id,query:q}});return NextResponse.json(data);}

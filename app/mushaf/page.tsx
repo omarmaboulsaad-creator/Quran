@@ -1,0 +1,2 @@
+import {getSurah} from "@/lib/quran";
+export default async function Mushaf(){const s=await getSurah(1);return <><div className="top"><h1>المصحف</h1><span className="muted">سورة الفاتحة</span></div><div className="card"><div className="search"><input placeholder="البحث متاح عبر API"/><button className="btn">بحث</button></div></div><br/><div className="card">{s.ayahs.map((a:any)=><div key={a.number} className="verse" style={{marginBottom:12}}>{a.text} <small>﴿{a.numberInSurah}﴾</small></div>)}</div></>}
